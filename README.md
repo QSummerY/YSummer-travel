@@ -1,7 +1,7 @@
-# 出行管理
+# travel route
 
-## 建库
+## db
 python3 models/travel.py
 
-## 运行
+## run
 python3 app.py

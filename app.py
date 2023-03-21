@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from config import DB_URI
 
 
-#pip3 fastapi uvicorn
+# pip3 fastapi uvicorn
 app = FastAPI()
 
 app.include_router(travel, prefix='/travel', tags=['出行'])
