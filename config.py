@@ -1,7 +1,7 @@
 DEBUG = True
 JSON_AS_ASCII = False
 
-#数据库配置
+# 数据库配置
 DB_URI = 'mysql://user:pass@localhost/dbname'
 
 
