@@ -1,9 +1,12 @@
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-import os, sys
+import os, sys, json
 real_dir=os.getcwd()
 sys.path.append(real_dir)
-from app import engine
+from config import DB_URI
+from sqlalchemy import create_engine
+engine = create_engine(DB_URI)
+
 
 
 
@@ -24,5 +27,12 @@ class Journey(Base):
     departure_time = Column(DateTime) #出行时间
     arrival_time = Column(DateTime) #到达到时间
     desc = Column(String(128))  #出行描述，原因
+
+    def to_json(self):
+        dict = {}
+        dict.update(self.__dict__)
+        if "_sa_instance_state" in dict:
+            del dict['_sa_instance_state']
+        return dict
 
 Base.metadata.create_all(engine)
