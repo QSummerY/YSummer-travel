@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 class JourneyBase(BaseModel):
+    id: Optional[int] = ""
     username: str
     way: int
     price: int
