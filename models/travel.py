@@ -33,6 +33,8 @@ class Journey(Base):
         dict.update(self.__dict__)
         if "_sa_instance_state" in dict:
             del dict['_sa_instance_state']
+        if 'departure_time' in dict:  dict['departure_time'] = dict['departure_time'].strftime("%Y-%m-%d %H:%M:%S")
+        if 'arrival_time' in dict:  dict['arrival_time'] = dict['arrival_time'].strftime("%Y-%m-%d %H:%M:%S")
         return dict
 
 Base.metadata.create_all(engine)

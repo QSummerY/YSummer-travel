@@ -32,11 +32,21 @@ async def create(journey: JourneyBase):
         session.add(j1)
         session.commit()
         session.close()
-    return f"hello travel, {journey}"
+    return {"code":200, "data": "", "msg": "Insert Success"}
+
+@travel.get("/read_all")
+def read_all():
+    with Session() as session:
+        all_query = session.query(Journey).order_by(Journey.id.desc()).all()
+        data = []
+        for item in all_query:
+            data.append(item.to_json())
+
+    return {"code":200, "data": data, "msg": "Query success"}
 
 @travel.get("/read_one")
 def read_one():
     with Session() as session:
-        one_query = session.query(Journey).first().to_json()
+        data = session.query(Journey).first().to_json()
 
-    return f"hello travel, {one_query}"
+    return {"code":200, "data": data, "msg": "Query success"}
