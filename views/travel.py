@@ -70,8 +70,15 @@ def read_all():
 
 
 @travel.get("/read_one")
-def read_one():
+def read_one(id: int = 0, username: str = ""):
+    #id和username 参数 2选1
+    if (id == 0 and username == "") or (id > 0 and username != ""):
+        return {"code": 400, "data": "", "msg": "param: id/username must use one arg"}
+
     with Session() as session:
-        data = session.query(Journey).first().to_json()
+        if id == 0: #如果没传id，则使用username查询，否则查询id
+            data = session.query(Journey).filter(Journey.username == username).first()
+        else:
+            data = session.query(Journey).filter(Journey.id == id).first()
 
     return {"code": 200, "data": data, "msg": "Query success"}
